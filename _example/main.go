@@ -40,11 +40,25 @@ func printAccountExchanges(address string) {
 	}
 }
 
+func printAccountOrders(address string) {
+	c := xrplda.NewClient(nil)
+	opts := &xrplda.GetAccountOrdersOptions{Limit: 5}
+	orders, res, err := c.GetAccountOrders(address, opts)
+	if err != nil {
+		fmt.Println(err, res)
+	}
+	for _, o := range orders {
+		fmt.Println(o)
+	}
+}
+
 func main() {
-	printRate(XRP, USDgx)
+	// printRate(XRP, USDgx)
 	// printRate(BTCgx, USDgx)
 	// printRate(ETHgx, USDgx)
 	// printRate(EURgx, USDgx)
 
-	printAccountExchanges(addr)
+	// printAccountExchanges(addr)
+
+	printAccountOrders(addr)
 }
