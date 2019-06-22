@@ -15,6 +15,10 @@ const (
 	ETHgx = "ETH+rcA8X3TVMST1n3CJeAdGk1RdRCHii7N2h"
 )
 
+const (
+	addr = "rsyDrDi9Emy6vPU78qdxovmNpmj5Qh4NKw"
+)
+
 func printRate(base, counter string) {
 	c := xrplda.NewClient()
 	rate, res, err := c.GetExchangeRates(base, counter, nil)
@@ -24,9 +28,22 @@ func printRate(base, counter string) {
 	fmt.Printf("%s/%s = %s\n", base, counter, rate)
 }
 
+func printAccountExchanges(address string) {
+	c := xrplda.NewClient()
+	exchanges, res, err := c.GetAccountExchanges(address, nil)
+	if err != nil {
+		fmt.Println(err, res)
+	}
+	for _, ex := range exchanges {
+		fmt.Println(ex)
+	}
+}
+
 func main() {
-	printRate(XRP, USDgx)
-	printRate(BTCgx, USDgx)
-	printRate(ETHgx, USDgx)
-	printRate(EURgx, USDgx)
+	// printRate(XRP, USDgx)
+	// printRate(BTCgx, USDgx)
+	// printRate(ETHgx, USDgx)
+	// printRate(EURgx, USDgx)
+
+	printAccountExchanges(addr)
 }

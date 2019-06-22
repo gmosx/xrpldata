@@ -2,14 +2,13 @@ package xrplda
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"net/url"
 	"time"
 )
 
-// GetExchangeRatesOptions contains optional parameters for the GetExchangeRates
-// method.GetExchangeRatesOptions
+// GetExchangeRatesOptions specifies the optional parameters for the
+// GetExchangeRates method.
 type GetExchangeRatesOptions struct {
 	Date   time.Time
 	Strict bool
@@ -23,7 +22,7 @@ type exchangeRatesResponse struct {
 // specific time.
 // https://developers.ripple.com/data-api.html#get-exchange-rates
 func (c *Client) GetExchangeRates(base, counter string, opts *GetExchangeRatesOptions) (string, *Response, error) {
-	path := fmt.Sprintf("/exchange_rates/%s/%s", base, counter)
+	path := "/exchange_rates/" + base + "/" + counter
 
 	if opts != nil {
 		v := url.Values{}
