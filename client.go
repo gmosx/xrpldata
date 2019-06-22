@@ -23,10 +23,12 @@ type Client struct {
 
 // NewClient returns a new XRPL Data API client initialized with default
 // parameters.
-func NewClient() *Client {
-	// TODO: allow for configuration.
-	hc := &http.Client{
-		Timeout: time.Second * 10,
+func NewClient(httpClient *http.Client) *Client {
+	hc := httpClient
+	if hc == nil {
+		hc = &http.Client{
+			Timeout: time.Second * 10,
+		}
 	}
 
 	return &Client{

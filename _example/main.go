@@ -20,7 +20,7 @@ const (
 )
 
 func printRate(base, counter string) {
-	c := xrplda.NewClient()
+	c := xrplda.NewClient(nil)
 	rate, res, err := c.GetExchangeRates(base, counter, nil)
 	if err != nil {
 		fmt.Println(err, res)
@@ -29,8 +29,9 @@ func printRate(base, counter string) {
 }
 
 func printAccountExchanges(address string) {
-	c := xrplda.NewClient()
-	exchanges, res, err := c.GetAccountExchanges(address, nil)
+	c := xrplda.NewClient(nil)
+	opts := &xrplda.GetAccountExchangesOptions{Descending: true, Limit: 10}
+	exchanges, res, err := c.GetAccountExchanges(address, opts)
 	if err != nil {
 		fmt.Println(err, res)
 	}
@@ -40,7 +41,7 @@ func printAccountExchanges(address string) {
 }
 
 func main() {
-	// printRate(XRP, USDgx)
+	printRate(XRP, USDgx)
 	// printRate(BTCgx, USDgx)
 	// printRate(ETHgx, USDgx)
 	// printRate(EURgx, USDgx)
