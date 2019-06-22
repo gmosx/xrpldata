@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/url"
+	"strconv"
 	"time"
 )
 
@@ -15,7 +16,6 @@ type GetAccountExchangesOptions struct {
 	Descending bool
 	Limit      int
 	Marker     string
-	Format     string
 }
 
 type accountExchangesResponse struct {
@@ -31,6 +31,26 @@ func (c *Client) GetAccountExchanges(address string, opts *GetAccountExchangesOp
 
 	if opts != nil {
 		v := url.Values{}
+
+		if !opts.Start.IsZero() {
+			v.Set("start", FormatTime(opts.Start))
+		}
+
+		if !opts.End.IsZero() {
+			v.Set("end", FormatTime(opts.End))
+		}
+
+		if opts.Descending {
+			v.Set("descending", "true")
+		}
+
+		if opts.Limit != 0 {
+			v.Set("limit", strconv.Itoa(opts.Limit))
+		}
+
+		if opts.Marker != "" {
+			v.Set("marker", opts.Marker)
+		}
 
 		path += "?" + v.Encode()
 	}
