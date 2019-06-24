@@ -1,4 +1,4 @@
-package xrplda
+package xrpldata
 
 // Balance represents an account's balance in a specific currency with a
 // specific counterparty at a single point in time.

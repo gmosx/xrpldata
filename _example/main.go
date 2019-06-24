@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"go.reizu.org/xrplda"
+	"go.reizu.org/xrpldata"
 )
 
 const (
@@ -20,7 +20,7 @@ const (
 )
 
 func printRate(base, counter string) {
-	c := xrplda.NewClient(nil)
+	c := xrpldata.NewClient(nil)
 	rate, res, err := c.GetExchangeRates(base, counter, nil)
 	if err != nil {
 		fmt.Println(err, res)
@@ -29,8 +29,8 @@ func printRate(base, counter string) {
 }
 
 func printAccountExchanges(address string) {
-	c := xrplda.NewClient(nil)
-	opts := &xrplda.GetAccountExchangesOptions{Descending: true, Limit: 10}
+	c := xrpldata.NewClient(nil)
+	opts := &xrpldata.GetAccountExchangesOptions{Descending: true, Limit: 10}
 	exchanges, res, err := c.GetAccountExchanges(address, opts)
 	if err != nil {
 		fmt.Println(err, res)
@@ -41,8 +41,8 @@ func printAccountExchanges(address string) {
 }
 
 func printAccountOrders(address string) {
-	c := xrplda.NewClient(nil)
-	opts := &xrplda.GetAccountOrdersOptions{Limit: 5}
+	c := xrpldata.NewClient(nil)
+	opts := &xrpldata.GetAccountOrdersOptions{Limit: 5}
 	orders, res, err := c.GetAccountOrders(address, opts)
 	if err != nil {
 		fmt.Println(err, res)
@@ -53,12 +53,12 @@ func printAccountOrders(address string) {
 }
 
 func main() {
-	// printRate(XRP, USDgx)
+	printRate(XRP, USDgx)
 	// printRate(BTCgx, USDgx)
 	// printRate(ETHgx, USDgx)
 	// printRate(EURgx, USDgx)
 
-	// printAccountExchanges(addr)
+	printAccountExchanges(addr)
 
-	printAccountOrders(addr)
+	// printAccountOrders(addr)
 }

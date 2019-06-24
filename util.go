@@ -1,4 +1,4 @@
-package xrplda
+package xrpldata
 
 import "time"
 

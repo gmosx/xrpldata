@@ -1,3 +1,3 @@
-module go.reizu.org/xrplda
+module go.reizu.org/xrpldata
 
 go 1.12
