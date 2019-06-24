@@ -5,7 +5,11 @@ A client for the [Ripple Data API V2](https://xrpl.org/data-api.html). The Rippl
 ## Example
 
 ```go
-c := xrpldata.NewClient(nil)
+hc = &http.Client{
+    Timeout: time.Second * 10,
+}
+
+c := xrpldata.NewClient(hc)
 
 rate, _, err := c.GetExchangeRates("XRP", "USD+rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q", nil)
 

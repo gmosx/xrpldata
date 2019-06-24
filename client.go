@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"time"
 )
 
 const rippleDataAPIV2BaseURL = "https://data.ripple.com"
@@ -14,6 +13,8 @@ type Response struct {
 	*http.Response
 	Body []byte
 }
+
+// TODO: Add support for error handling and pagination.
 
 // Client is a client for the XRPL Data API.
 type Client struct {
@@ -26,9 +27,7 @@ type Client struct {
 func NewClient(httpClient *http.Client) *Client {
 	hc := httpClient
 	if hc == nil {
-		hc = &http.Client{
-			Timeout: time.Second * 10,
-		}
+		hc = &http.Client{}
 	}
 
 	return &Client{
