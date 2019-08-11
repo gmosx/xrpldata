@@ -30,6 +30,20 @@ func printRate(base, counter string) {
 	fmt.Printf("%s/%s = %s\n", base, counter, rate)
 }
 
+func printAccountBalances(address string) {
+	c := xrpldata.NewClient(nil)
+
+	opts := &xrpldata.GetAccountBalancesOptions{Limit: 10}
+	exchanges, res, err := c.GetAccountBalances(address, opts)
+	if err != nil {
+		fmt.Println(err, res)
+	}
+
+	for _, ex := range exchanges {
+		fmt.Println(ex)
+	}
+}
+
 func printAccountExchanges(address string) {
 	c := xrpldata.NewClient(nil)
 
@@ -79,6 +93,8 @@ func main() {
 	// printRate(BTCgx, USDgx)
 	// printRate(ETHgx, USDgx)
 	// printRate(EURgx, USDgx)
+
+	printAccountBalances(addr)
 
 	printAccountExchanges(addr)
 

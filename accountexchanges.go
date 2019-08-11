@@ -25,7 +25,7 @@ type accountExchangesResponse struct {
 	Exchanges []Exchange
 }
 
-// GetAccountExchanges retrieve exchanges for a given account over time.
+// GetAccountExchanges retrieves exchanges for a given account over time.
 func (c *Client) GetAccountExchanges(address string, opts *GetAccountExchangesOptions) ([]Exchange, *Response, error) {
 	path := "/accounts/" + address + "/exchanges"
 
