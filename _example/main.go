@@ -34,12 +34,12 @@ func printAccountBalances(address string) {
 	c := xrpldata.NewClient(nil)
 
 	opts := &xrpldata.GetAccountBalancesOptions{Limit: 10}
-	exchanges, res, err := c.GetAccountBalances(address, opts)
+	balances, res, err := c.GetAccountBalances(address, opts)
 	if err != nil {
 		fmt.Println(err, res)
 	}
 
-	for _, ex := range exchanges {
+	for _, ex := range balances {
 		fmt.Println(ex)
 	}
 }
